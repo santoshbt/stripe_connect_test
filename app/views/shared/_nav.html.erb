@@ -1,0 +1,15 @@
+<div class='logo'>
+	<h1>Invisalign</h1>
+</div>
+
+<ul class="custom-nav nav nav-tabs">
+	<li>
+		<%= link_to "Home", root_path %>
+	</li>
+
+	<% if current_user %>
+	<li>
+		<%= link_to "Logout", destroy_user_session_path, method: "delete" %>
+	</li>
+	<% end %>
+</ul>	

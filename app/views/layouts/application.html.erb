@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>StripeConnectTest</title>
+    <title>Stripe Connect Custom</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,15 @@
   </head>
 
   <body>
-    <%= yield %>
+  <div class="container">
+		<div class="row">
+			  <div class="col-md-12">
+          <%= render 'shared/nav' %>
+          <%= yield %>
+        </div>
+	    </div>
+	  </div>  
+  </div>  
+   <%#= render "shared/alerts" %> 
   </body>
 </html>
