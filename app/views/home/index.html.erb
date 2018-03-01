@@ -3,4 +3,8 @@
 </p>
 
 <span class="stripe_result"></span>
-<div class="required_info" style="display:none;"></div>
+
+<% display_flag =  @additional_fields_required.blank? ? "display:none;" : "display:block;" %>
+<div class="required_info" style="<%= display_flag %>">
+    <%= render 'required_info', locals: { additional_fields: @additional_fields_required } %>
+</div>

@@ -13,5 +13,12 @@ $(document).ready(function(){
         console.log("Error");
         $(".stripe_result").html("Something went wrong, please try again..!");
     });  
+
+    $("#verify_account").on("click", function(e){
+        // e.preventDefault();
+        console.log("hiii");
+    });
+    
 });
+
 

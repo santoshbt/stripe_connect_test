@@ -1,1 +1,2 @@
-$(".required_info").html("<%=escape_javascript(render partial: 'required_info') %>")
+$(".required_info").html("<%= escape_javascript(render partial: 'required_info', 
+                                                    locals: { @additional_fields_required }) %>")
