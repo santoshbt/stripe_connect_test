@@ -1,10 +1,24 @@
 <p class="stripe_btn">
-    <%= link_to "Stripe Payment Registration", "/create_account", {class: "btn btn-primary", id: "stripe_connect", remote: true} %>
+    <%= link_to "Create Payment Account", "/create_account", {class: "btn btn-primary", id: "stripe_connect", remote: true} %>
 </p>
 
 <span class="stripe_result"></span>
-
-<% display_flag =  @additional_fields_required.blank? ? "display:none;" : "display:block;" %>
-<div class="required_info" style="<%= display_flag %>">
-    <%= render 'required_info', locals: { additional_fields: @additional_fields_required } %>
+<% display_flag =  current_user.stripe_id && !@agreement_accepted ? "display:block;" : "display:none;" %>
+<div class="agreement" style="<%= display_flag %>">
+    <%= render 'agreement' %>
 </div>
+
+<span class="agreement_result"></span>
+
+<% display_required_info = @agreement_accepted ?  "display:block;" : "display:none;" %>
+
+<% unless flash[:error].blank? %>
+    <div class="alert alert-danger">
+        <%= flash[:error] %>
+    </div>
+<% end %>
+
+<div class="required_info" style="<%= display_required_info %>%">
+    <%= render 'required_info'%>
+</div>
+
