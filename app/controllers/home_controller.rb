@@ -11,8 +11,6 @@ class HomeController < ApplicationController
     #### Need to refactor ####
     def agreement
         begin
-            accept_agreement = Account.new(current_user.stripe_id).accept(request)
-
             account_status = Account.new(current_user.stripe_id).account_status
             account_status.tos_acceptance.date = Time.now.to_i
             account_status.tos_acceptance.ip = request.remote_ip # Assumes you're not using a proxy

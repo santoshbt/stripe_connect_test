@@ -16,6 +16,7 @@ class Account
         !account_status.tos_acceptance.date.blank? && !account_status.tos_acceptance.ip.blank?
     end
 
+    ######## This method is not used as it is not working for unknown reason #######
     def accept(request)        
         account_status.tos_acceptance.date = Time.now.to_i
         account_status.tos_acceptance.ip = request.remote_ip # Assumes you're not using a proxy
@@ -24,14 +25,16 @@ class Account
 
     def update_first_stage_info(req_params)
         account = account_status
-        account.external_account = req_params[:external_account]
-        account.legal_entity.dob.day = req_params[:day]
-        account.legal_entity.dob.month = req_params[:month]
-        account.legal_entity.dob.year = req_params[:year]
-        account.legal_entity.first_name = req_params[:first_name]
-        account.legal_entity.last_name = req_params[:last_name]
-        account.legal_entity.type = req_params[:legal_entity_type]
-        account.save
+        account.tap { |acc|
+            acc.external_account = req_params[:external_account]
+            acc.legal_entity.dob.day = req_params[:day]
+            acc.legal_entity.dob.month = req_params[:month]
+            acc.legal_entity.dob.year = req_params[:year]
+            acc.legal_entity.first_name = req_params[:first_name]
+            acc.legal_entity.last_name = req_params[:last_name]
+            acc.legal_entity.type = req_params[:legal_entity_type]
+            acc.save
+        }       
     end
         
 end
