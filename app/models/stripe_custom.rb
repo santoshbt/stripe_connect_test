@@ -1,4 +1,6 @@
 class StripeCustom
+    # mount_uploader :attachment, AttachmentUploader
+
     attr_reader :account_token, :first_name, :last_name, :day, :month, :year, :legal_entity_type
 
     def initialize(account_token, first_name, last_name, day, month, year, legal_entity_type)

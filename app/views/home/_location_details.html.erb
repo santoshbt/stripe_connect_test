@@ -1,9 +1,8 @@
-
 <div class="location_result"></div>
-
+<div class = "well">
 <h3> Location Information </h3>
 
-<%= form_tag('/verify_location_info', method: :post, :id => 'location_info_frm', remote: true) do %>
+<%= form_tag('/verify_location_info', method: :post, :id => 'location_info_frm', remote: true, :authenticity_token => true) do %>
     <div class="form-group row">
         <div class="col-md-6">
             <label for="addr_line1">Address Line 1</label>
@@ -69,3 +68,4 @@
     </div>  
     <%= submit_tag "Submit", class: "btn btn-primary", id: "add_location_details" %>       
 <% end %>
+</div>

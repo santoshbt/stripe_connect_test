@@ -54,5 +54,30 @@ class Account
             return false
         end
     end
+
+    def upload_proof(proof)
+        begin
+            fpath = File.join Rails.root, 'public'
+            file_obj = Stripe::FileUpload.create(
+            {
+                :purpose => proof.purpose,
+                :file => File.new(fpath.to_s + proof.file.to_s)
+            },
+            {
+                :stripe_account => @stripe_id
+            }
+            )
+            file = file_obj.id
+
+            account = account_status        
+            account.tap { |acc|
+                acc.legal_entity.personal_id_number = proof.personal_id_number
+                acc.legal_entity.verification.document = file
+                return true if acc.save
+            }
+        rescue => exception
+            return false
+        end
+    end
         
 end

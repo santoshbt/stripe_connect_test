@@ -77,7 +77,8 @@ class HomeController < ApplicationController
 
     def second_stage_info
         account = Account.new(current_user.stripe_id).account_status
-        @type = 'company' if account.legal_entity.type  == 'company'
+        @type = 'company' if account.legal_entity.type  == 'company'        
+        @proof = Proof.new
     end
 
     def location_info
@@ -90,5 +91,28 @@ class HomeController < ApplicationController
         respond_to do |format|
             format.js 
         end
+    end
+
+    def upload_id_proof
+        @proof = Proof.new proof_params
+        @proof.save    
+        account = Account.new(current_user.stripe_id)        
+        if account.upload_proof(@proof)            
+            redirect_to complete_verfification_path
+        else
+            flash[:error] = "Please upload the valid ID Proof."
+            render 'second_stage_info'
+        end
+
+        
+    end
+
+    def complete
+        @proof = Proof.last
+    end
+
+    private
+    def proof_params
+        params.require(:proof).permit(:purpose, :file, :personal_id_number)
     end
 end
