@@ -76,5 +76,19 @@ class HomeController < ApplicationController
     end
 
     def second_stage_info
+        account = Account.new(current_user.stripe_id).account_status
+        @type = 'company' if account.legal_entity.type  == 'company'
+    end
+
+    def location_info
+        account = Account.new(current_user.stripe_id)        
+        if account.update_location_info(params[:location])
+            @success_flag = true
+        else
+            @success_flag = false
+        end
+        respond_to do |format|
+            format.js 
+        end
     end
 end

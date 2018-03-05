@@ -36,5 +36,23 @@ class Account
             acc.save
         }       
     end
+
+    def update_location_info(location)
+        account = account_status
+        begin
+            account.tap { |acc|
+                acc.legal_entity.address.line1 = location[:addr_line1]
+                acc.legal_entity.address.postal_code = location[:postal_code]
+                acc.legal_entity.address.city = location[:city]
+                acc.legal_entity.address.state = location[:state]
+                acc.legal_entity.ssn_last_4 = location[:ssn]
+                acc.legal_entity.business_name = location[:business_name] unless location[:business_name].blank?
+                # acc.legal_entity.business_tax_id unless location[:business_tax_id].blank?            
+                return true if acc.save            
+            }
+        rescue => exception
+            return false
+        end
+    end
         
 end

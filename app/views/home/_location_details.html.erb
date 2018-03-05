@@ -1,0 +1,71 @@
+
+<div class="location_result"></div>
+
+<h3> Location Information </h3>
+
+<%= form_tag('/verify_location_info', method: :post, :id => 'location_info_frm', remote: true) do %>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="addr_line1">Address Line 1</label>
+            <span class="mand">*</span>
+            <%= text_field_tag 'location[addr_line1]', nil, class: "form-control" %>
+        </div>
+    </div>
+
+    <div class="form-group row">
+         <div class="col-md-6">
+            <label for="addr_line1">Address Line 2</label>
+            <%= text_field_tag 'location[addr_line2]', nil, class: "form-control" %>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="postal_code">Postal Code</label>
+             <span class="mand">*</span>
+            <%= text_field_tag 'location[postal_code]', nil, class: "form-control" %>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="city">City</label>
+             <span class="mand">*</span>
+            <%= text_field_tag 'location[city]', nil, class: "form-control" %>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="state">State</label>
+             <span class="mand">*</span>
+            <%= text_field_tag 'location[state]', nil, class: "form-control" %>
+        </div>
+    </div>
+
+    <% if @type == 'company' %>
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="business_name">Business Name</label>
+                <span class="mand">*</span>
+                <%= text_field_tag 'location[business_name]', nil, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="business_tax_id">Business Tax ID</label>
+                <%= text_field_tag 'location[business_tax_id]', nil, class: "form-control" %>
+            </div>
+        </div>
+    <% end %>
+
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="ssn">SSN (Last 4 digits)</label>
+             <span class="mand">*</span>
+            <%= text_field_tag 'location[ssn]', nil, class: "form-control" %>
+        </div>
+    </div>  
+    <%= submit_tag "Submit", class: "btn btn-primary", id: "add_location_details" %>       
+<% end %>

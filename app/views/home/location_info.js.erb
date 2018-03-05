@@ -1,0 +1,9 @@
+<% if @success_flag %>
+    $(".location_result").html("Updated successfully.")
+    $(".location_result").removeClass("alert alert-danger")
+    $(".location_result").addClass("alert alert-success")
+<% else %>
+    $(".location_result").html("Sorry, please try again.")
+    $(".location_result").removeClass("alert alert-success")
+    $(".location_result").addClass("alert alert-danger")
+<% end %>
