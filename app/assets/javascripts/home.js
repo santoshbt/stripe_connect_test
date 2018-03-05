@@ -52,22 +52,22 @@ $(document).ready(function(){
                     $("#bank_fld_err").removeClass("alert alert-danger");
                     $("#bank_fld_err").html("");
                     $("#additional_details").css("display", "block");
-                    $("#account_token").val(result.token.id);
-                    $("#external_account").val(result.token.id);
+                    $("#user_account_token").val(result.token.id);
+                    $("#user_external_account").val(result.token.id);
                 }
                 
         });
     }
 
     const first_stage_parameters = () => {
-        return(["account_token", "first_name", "last_name", "user_dob_1i",
-        "user_dob_2i", "user_dob3i", "legal_entity_type"]);
+        return(["user_account_token", "user_first_name", "user_last_name", "user_dob_1i",
+        "user_dob_2i", "user_dob3i", "user_legal_entity_type"]);
     }
 
     var verify_params = (first_stage_parameters) => {
-        if( $(account_token).val().trim().length == 0 || $(first_name).val().trim().length == 0 || $(last_name).val().trim().length == 0 ||
+        if( $(user_account_token).val().trim().length == 0 || $(user_first_name).val().trim().length == 0 || $(user_last_name).val().trim().length == 0 ||
          $(user_dob_1i).val().trim().length == 0 || $(user_dob_2i).val().trim().length == 0 || $(user_dob_3i).val().trim().length == 0 ||
-         $(legal_entity_type).val().trim().length == 0 ){
+         $(user_legal_entity_type).val().trim().length == 0 ){
              $("#reqd_fld_err").addClass("alert alert-danger");
              $("#reqd_fld_err").html("Please enter all the details properly.");
          }else{

@@ -12,12 +12,6 @@
 
 <% display_required_info = @agreement_accepted ?  "display:block;" : "display:none;" %>
 
-<% unless flash[:error].blank? %>
-    <div class="alert alert-danger">
-        <%= flash[:error] %>
-    </div>
-<% end %>
-
 <div class="required_info" style="<%= display_required_info %>%">
     <%= render 'required_info'%>
 </div>

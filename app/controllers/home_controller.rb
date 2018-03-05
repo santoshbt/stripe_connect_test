@@ -46,27 +46,11 @@ class HomeController < ApplicationController
 
    ###############  Verify the additional required info ###################
     def first_stage_info
-        user = params[:user]
-        account_token = params[:account_token]
-        first_name = params[:first_name]
-        last_name = params[:last_name]
-        day, month, year = user['dob(3i)'].to_i, user['dob(2i)'].to_i, user['dob(1i)'].to_i
-        legal_entity_type = params[:legal_entity_type]
-
-        stripe = StripeCustom.new(account_token, first_name, last_name, day, month, year, legal_entity_type)        
+        stripe = StripeCustom.new(params[:user])        
 
         if stripe.met_verification
             account = Account.new(current_user.stripe_id)
-            first_stage = account.update_first_stage_info({
-                                                        external_account: stripe.account_token,
-                                                        first_name: stripe.first_name,
-                                                        last_name: stripe.last_name,
-                                                        day: stripe.day,
-                                                        month: stripe.month,
-                                                        year: stripe.year,
-                                                        legal_entity_type: stripe.legal_entity_type
-                                                        })
-
+            first_stage = account.update_first_stage_info( stripe ) 
             redirect_to second_stage_info_path
         else 
             @agreement_accepted = true
@@ -107,8 +91,7 @@ class HomeController < ApplicationController
         
     end
 
-    def complete
-        @proof = Proof.last
+    def complete        
     end
 
     private

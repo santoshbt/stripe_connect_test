@@ -1,16 +1,14 @@
 class StripeCustom
-    # mount_uploader :attachment, AttachmentUploader
-
     attr_reader :account_token, :first_name, :last_name, :day, :month, :year, :legal_entity_type
 
-    def initialize(account_token, first_name, last_name, day, month, year, legal_entity_type)
-        @account_token = account_token
-        @first_name = first_name
-        @last_name = last_name
-        @day = day
-        @month = month
-        @year = year
-        @legal_entity_type = legal_entity_type
+    def initialize(user)
+        @account_token = user['account_token']
+        @first_name = user['first_name']
+        @last_name = user['last_name']
+        @day = user['dob(3i)'].to_i
+        @month = user['dob(2i)'].to_i
+        @year = user['dob(1i)'].to_i
+        @legal_entity_type = user['legal_entity_type']
     end
 
     def met_verification

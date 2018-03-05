@@ -23,16 +23,16 @@ class Account
         account_status.save
     end
 
-    def update_first_stage_info(req_params)
+    def update_first_stage_info(stripe_account)     
         account = account_status
         account.tap { |acc|
-            acc.external_account = req_params[:external_account]
-            acc.legal_entity.dob.day = req_params[:day]
-            acc.legal_entity.dob.month = req_params[:month]
-            acc.legal_entity.dob.year = req_params[:year]
-            acc.legal_entity.first_name = req_params[:first_name]
-            acc.legal_entity.last_name = req_params[:last_name]
-            acc.legal_entity.type = req_params[:legal_entity_type]
+            acc.external_account = stripe_account.account_token
+            acc.legal_entity.dob.day = stripe_account.day
+            acc.legal_entity.dob.month = stripe_account.month
+            acc.legal_entity.dob.year = stripe_account.year
+            acc.legal_entity.first_name = stripe_account.first_name
+            acc.legal_entity.last_name = stripe_account.last_name
+            acc.legal_entity.type = stripe_account.legal_entity_type
             acc.save
         }       
     end
