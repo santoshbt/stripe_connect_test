@@ -39,7 +39,7 @@ class Account
 
     def update_location_info(location)
         account = account_status
-        # begin
+        begin
             account.tap { |acc|
                 acc.legal_entity.address.line1 = location[:addr_line1]
                 acc.legal_entity.address.postal_code = location[:postal_code]
@@ -50,9 +50,9 @@ class Account
                 acc.legal_entity.business_tax_id = location[:business_tax_id] unless location[:business_tax_id].blank?            
                 return true if acc.save            
             }
-        # rescue => exception
-        #     return false
-        # end
+        rescue => exception
+            return false
+        end
     end
 
     def upload_proof(proof)
