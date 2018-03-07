@@ -1,54 +1,42 @@
-<div id="bank_fld_err"></div>
+<div id="bank_fld_err" class="alert alert-danger alert-dismissible" role="alert" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    Please provide all the bank details properly.
+</div>
+
+<div id="bank_fld_success" class="alert alert-success alert-dismissible" role="alert" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    Bank Details are verified successfully.
+</div>
 
 <div class="well">
     <h3>Verify Bank details</h3>
-
+<%= form_tag('/verify_bank_info', method: :post, :id => 'bank_info_frm', remote: true, :authenticity_token => true) do %>
     <div class="form-group row">
         <div class="col-md-6">
             <label for="country">Country</label>
-            <input class="form-control" id="country" type="text" value=<%= current_user.country %> disabled>
+            <input class="form-control" id="country" type="text" name="bank_detail[country]" value=<%= current_user.country %> disabled>
         </div>
     </div>    
     <div class="form-group row">
         <div class="col-md-6">
             <label for="country">Currency</label>
-            <input class="form-control" id="currency" type="text" value= "USD" >
+            <input class="form-control" id="currency" name="bank_detail[currency]" type="text" value= "USD" autocomplete="off" >
         </div>
     </div>  
     <div class="form-group row">
         <div class="col-md-6">
             <label for="country">Routing Number</label>
-            <input class="form-control" id="routing_number" type="text">
+            <input class="form-control" id="routing_number" name="bank_detail[routing_number]" type="text" autocomplete="off">
         </div>
     </div>  
     <div class="form-group row">
         <div class="col-md-6">
             <label for="country">Account Number</label>
-            <input class="form-control" id="account_number" type="text">
+            <input class="form-control" id="account_number" name="bank_detail[account_number]"  type="text" autocomplete="off">
         </div>
-    </div>  
-    <div class="form-group row">
-        <div class="col-md-6">
-            <label for="country">Account Holder Name</label>
-            <input class="form-control" id="account_holder_name" type="text">
-        </div>
-    </div>  
-    <div class="form-group row">
-        <div class="col-md-6">
-            <label for="acc_type">Account Holder Type </label>
-            <select id="acc_type" name="account_type" style="width: 60%;">
-                <option value="company">Company</option>
-                <option value="individual">Individual</option>
-            </select>
-        </div>
-    </div>  
-    <%= link_to "Verify Account", "javascript:void(0);", {class: "btn btn-primary", id: "verify_account"} %>
-</div>
+    </div>
 
-<script>
-  $("#verify_account").on("click", (e) => {      
-        let account_details = ["country", "currency", "routing_number", 
-                                "account_number", "account_holder_name", "acc_type"];
-        verify_details(...account_details);
-    });  
-</script>
+    <%= submit_tag "Submit", class: "btn btn-primary", id: "verify_account" %>   
+</div>
+<% end %>
+

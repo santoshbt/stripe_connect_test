@@ -14,7 +14,7 @@ class Account
 
     def acceptance_status
         !account_status.tos_acceptance.date.blank? && !account_status.tos_acceptance.ip.blank?
-    end
+    end    
 
     ######## This method is not used as it is not working for unknown reason #######
     def accept(request)        
@@ -26,7 +26,6 @@ class Account
     def update_first_stage_info(stripe_account)     
         account = account_status
         account.tap { |acc|
-            acc.external_account = stripe_account.account_token
             acc.legal_entity.dob.day = stripe_account.day
             acc.legal_entity.dob.month = stripe_account.month
             acc.legal_entity.dob.year = stripe_account.year
@@ -35,6 +34,25 @@ class Account
             acc.legal_entity.type = stripe_account.legal_entity_type
             acc.save
         }       
+    end
+
+    def bank_detail_verification(user, bank_details)
+        account = account_status
+        begin
+            account.tap{ |acc|
+                acc.external_account = {
+                    object: 'bank_account',
+                    country: user.country,
+                    currency: bank_details[:currency],
+                    routing_number: bank_details[:routing_number],
+                    account_number: bank_details[:account_number]
+                }
+                return true if acc.save
+            }
+        rescue => exception
+            return false
+        end
+      
     end
 
     def update_location_info(location)

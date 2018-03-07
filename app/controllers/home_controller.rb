@@ -44,6 +44,19 @@ class HomeController < ApplicationController
         end
     end
 
+    ############## Bank Details verificaiton ############################
+    def bank_details_verification
+        account = Account.new(current_user.stripe_id)
+        if account.bank_detail_verification(current_user, params[:bank_detail] )
+            @success_flag = true
+        else
+            @success_flag = false
+        end
+        respond_to do |format|
+            format.js 
+        end
+    end
+
    ###############  Verify the additional required info ###################
     def first_stage_info
         stripe = StripeCustom.new(params[:user])        

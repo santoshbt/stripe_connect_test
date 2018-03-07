@@ -1,18 +1,24 @@
-<p class="stripe_btn">
-    <%= link_to "Create Payment Account", "/create_account", {class: "btn btn-primary", id: "stripe_connect", remote: true} %>
-</p>
 
-<span class="stripe_result"></span>
-<% display_flag =  current_user.stripe_id && !@agreement_accepted ? "display:block;" : "display:none;" %>
-<div class="agreement" style="<%= display_flag %>">
-    <%= render 'agreement' %>
-</div>
+<% if !stripe_account_created? || !agreement_accepted?  %>
+    <div class="jumbotron connect_to_stripe">
+        <% stripe_display_flag = %>
+        <p class="stripe_btn" style=<%= stripe_account_display %>>
+            <%= link_to "Create Payment Account", "/create_account", {class: "btn btn-primary", id: "stripe_connect", remote: true} %>
+            <%= image_tag "/assets/loader3.gif", id: "create_acc_loader", class: "loader", style: "display:none;" %>
+        </p>
 
-<span class="agreement_result"></span>
+        <span class="stripe_result"></span>
+        <% agreement_display_flag =   %>
+        <div class="agreement" style=<%= agreement_display %>>
+            <%= render 'agreement' %>
+        </div>
 
-<% display_required_info = @agreement_accepted ?  "display:block;" : "display:none;" %>
+        <span class="agreement_result"></span>
+    </div>
+<% end %>
 
-<div class="required_info" style="<%= display_required_info %>%">
-    <%= render 'required_info'%>
-</div>
-
+<% if agreement_accepted? %>
+    <div class="required_info" style="<%= display_required_info %>%">
+        <%= render 'required_info'%>
+    </div>
+<% end %>

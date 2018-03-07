@@ -7,13 +7,6 @@
 <%= form_tag('/verify_first_stage_info', method: :post, :id => 'additional_info_frm') do %>
     <div class="form-group row">
         <div class="col-md-6">
-            <label for="external_account">Bank Account Token</label>
-            <%= text_field_tag 'user[external_account]', nil, disabled: true, class: "form-control" %>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-md-6">
             <label for="first_name">First Name</label>
             <%= text_field_tag 'user[first_name]', nil, class: "form-control" %>
         </div>
@@ -42,8 +35,6 @@
             </select>
         </div>
     </div>  
-   
-    <%= hidden_field_tag "user[account_token]"%>
 
     <%= submit_tag "Submit and Continue", class: "btn btn-primary", id: "add_details" %>       
 <% end %>

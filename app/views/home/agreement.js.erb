@@ -1,5 +1,4 @@
-<% if @accept_flag %>
-    $(".required_info").html("<%= escape_javascript(render partial: 'required_info', locals: @additional_fields_required ) %>")
-
+<% if @accept_flag %>    
+    $(".required_info").html("<%= escape_javascript(render partial: 'required_info', locals: @additional_fields_required ) %>") 
 <% end %>                                                    
 

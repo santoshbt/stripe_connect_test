@@ -22,3 +22,39 @@
     margin-top: 2px;
     font-weight: 15px;
 }
+
+.jumbotron{
+    background-color: rgb(147, 187, 87);
+    margin-top: 30px;
+}
+
+.loader{
+    height: 33px;
+    width: 30px;
+}
+
+#agree_loader{   
+    float: right;
+    margin-right: 82%;
+}
+
+#create_acc_loader{
+    float: right;
+    margin-right: 78%;
+}
+
+h3,p {
+    padding:0px 20px;
+}
+
+.bg-header{
+    background: #dab825;
+    color: white;
+    height: 30px;
+    border-radius: 4px;
+    width: 93%;
+}
+
+.tilte{
+    margin-left: 20px;
+}

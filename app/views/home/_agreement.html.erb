@@ -1,5 +1,12 @@
 <div>
-    <%= link_to "Accept Agreement", "/agreement", {class: "btn btn-primary", id: "register_account", remote: true} %>
-    <p>By registering your account, you agree to our <a href="#tos-acceptance">Services Agreement</a>
-     and the <a target="_blank" href="https://stripe.com/connect-account/legal">Stripe Connected Account Agreement</a>.</p>
+    <p>
+        <%= link_to "Accept Agreement", "/agreement", {class: "btn btn-primary agreement", id: "register_account", remote: true,
+                                                        data: {"loading-text" => "<i class='fa fa-refresh fa-spin'></i>" } } %>
+
+        <%= image_tag "/assets/loader3.gif", id: "agree_loader", class: "loader", style: "display:none;" %>
+    </p>
+
+    <h6>By registering your account, you agree to our <a href="#tos-acceptance">Services Agreement</a>
+     and the <a target="_blank" href="https://stripe.com/connect-account/legal">Stripe Connected Account Agreement</a>.</h6>
 </div>
+
