@@ -1,46 +1,44 @@
-<div id="bank_fld_err" class="alert alert-danger alert-dismissible" role="alert" style="display:none;">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    Please provide all the bank details properly.
-</div>
-
-<div id="bank_fld_success" class="alert alert-success alert-dismissible" role="alert" style="display:none;">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    Bank Details are verified successfully.
-</div>
-
-
-<div class="well">
-    <h3>Verify Bank details</h3>
-<%= form_tag('/verify_bank_info', method: :post, :id => 'bank_info_frm', remote: true, :authenticity_token => true) do %>
-    <div class="form-group row">
-        <div class="col-md-6">
-            <label for="country">Country</label>
-            <input class="form-control" id="country" type="text" name="bank_detail[country]" value=<%= current_user.country %> disabled>
-        </div>
-    </div>    
-    <div class="form-group row">
-        <div class="col-md-6">
-            <label for="country">Currency</label>
-            <span class="mand">*</span>
-            <input class="form-control" id="currency" name="bank_detail[currency]" type="text" value= "USD" autocomplete="off" >
-        </div>
-    </div>  
-    <div class="form-group row">
-        <div class="col-md-6">
-            <label for="country">Routing Number</label>
-            <span class="mand">*</span>
-            <input class="form-control" id="routing_number" name="bank_detail[routing_number]" type="text" autocomplete="off">
-        </div>
-    </div>  
-    <div class="form-group row">
-        <div class="col-md-6">
-            <label for="country">Account Number</label>
-            <span class="mand">*</span>
-            <input class="form-control" id="account_number" name="bank_detail[account_number]"  type="text" autocomplete="off">
-        </div>
+<div class="well ">
+    <div id="bank_fld_err" class="alert alert-danger alert-dismissible" role="alert" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        Please provide all the bank details properly.
     </div>
 
-    <%= submit_tag "Submit", class: "btn btn-primary", id: "verify_account" %>   
-</div>
-<% end %>
+    <div id="bank_fld_success" class="alert alert-success alert-dismissible" role="alert" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        Bank Details are verified successfully.
+    </div>
 
+    <h3>Verify Bank details</h3>
+    <%= form_tag('/verify_bank_info', method: :post, :id => 'bank_info_frm', remote: true, :authenticity_token => true) do %>
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="country">Country</label>
+                <input class="form-control" id="country" type="text" name="bank_detail[country]" value=<%= current_user.country %> disabled>
+            </div>
+        </div>    
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="country">Currency</label>
+                <span class="mand">*</span>
+                <input class="form-control" id="currency" name="bank_detail[currency]" type="text" value= "USD" autocomplete="off" >
+            </div>
+        </div>  
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="country">Routing Number</label>
+                <span class="mand">*</span>
+                <input class="form-control" id="routing_number" name="bank_detail[routing_number]" type="text" autocomplete="off">
+            </div>
+        </div>  
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="country">Account Number</label>
+                <span class="mand">*</span>
+                <input class="form-control" id="account_number" name="bank_detail[account_number]"  type="text" autocomplete="off">
+            </div>
+        </div>
+
+        <%= submit_tag "Submit", class: "btn btn-primary" ,data: { disable_with: "Please wait..." }, id: "verify_account" %>   
+    <% end %>
+</div>

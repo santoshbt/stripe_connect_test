@@ -1,7 +1,7 @@
 <div class="proof_result"></div>
 <div class = "well">
     <h3> Upload Govt ID Proof</h3>
-   <%= form_tag '/upload_id_proof', multipart: true do %>
+   <%= form_tag('/upload_id_proof', multipart: true) do %>
         <% if @proof.errors.any? %>
             <div id="error_explanation">
             <h2><%= pluralize(@proof.errors.count, "error") %> prohibited this pet from being saved:</h2>
@@ -44,7 +44,7 @@
         </div>
     
         <div class="actions">
-           <%= submit_tag "Submit", class: "btn btn-primary", id: "add_location_details" %> 
+           <%= submit_tag "Submit", class: "btn btn-primary", data: { disable_with: "Please wait..." }, id: "add_location_details" %> 
         </div>
     <% end %>
 </div>

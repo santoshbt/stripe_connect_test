@@ -2,16 +2,16 @@ $(document).ready(function(){
     $("#stripe_connect")
     .bind("ajax:beforeSend", function(xhr){
         console.log("Before");
-        $(".create_acc_loader").css("display", "block");
+        $("#create_acc_loader").css("display", "block");
     })
     .bind("ajax:success", function(evt, xhr, status, data){
         console.log("Success");
-        $(".create_acc_loader").css("display", "none");
+        $("#create_acc_loader").css("display", "none");
         $(".agreement").css('display', 'block');
     })
     .bind("ajax:error", function(evt, xhr, status, data){
         console.log("Error");
-        $(".create_acc_loader").css("display", "block");
+        $("#create_acc_loader").css("display", "block");
         $(".stripe_result").html("Something went wrong, please try again..!");
     });  
 
@@ -23,7 +23,9 @@ $(document).ready(function(){
     .bind("ajax:success", function(evt, xhr, status, data){
         console.log("Success");
         $("#agree_loader").css("display", "none");
+        $(".connect_to_stripe").css("display", "none");
         $(".required_info").css('display', 'block');
+
     })
     .bind("ajax:error", function(evt, xhr, status, data){
         console.log("Error");

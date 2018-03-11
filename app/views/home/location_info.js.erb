@@ -1,9 +1,7 @@
 <% if @success_flag %>
-    $(".location_result").html("Updated successfully.")
-    $(".location_result").removeClass("alert alert-danger")
-    $(".location_result").addClass("alert alert-success")
+    $("#location_result_err").css("display", "none")
+    $("#location_result_success").css("display", "block")
 <% else %>
-    $(".location_result").html("Sorry, please try again.")
-    $(".location_result").removeClass("alert alert-success")
-    $(".location_result").addClass("alert alert-danger")
+    $("#location_result_success").css("display", "none")
+    $("#location_result_err").css("display", "block")
 <% end %>

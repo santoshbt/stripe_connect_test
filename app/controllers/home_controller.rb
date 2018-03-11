@@ -97,11 +97,9 @@ class HomeController < ApplicationController
         if account.upload_proof(@proof)            
             redirect_to complete_verfification_path
         else
-            flash[:error] = "Please upload the valid ID Proof."
+            flash[:error] = "Please input the required information along with the valid ID Proof."
             render 'second_stage_info'
-        end
-
-        
+        end  
     end
 
     def complete        

@@ -1,18 +1,27 @@
-<div class='logo'>
-	<h1>Invisalign</h1>
+<div class='logo'>	
+	<nav class="navbar navbar-default">
+	<div class="container-fluid header">
+		<h1>Invisalign</h1>
+	</div>
+	</nav>
 </div>
 
-<ul class="custom-nav nav nav-tabs">
-	<li>
-		<%= link_to "Home", root_path %>
-	</li>
-
+<ul class="nav nav-tabs">
 	<% if current_user %>
-	<li>
-		<%= link_to "Logout", destroy_user_session_path, method: "delete" %>
-	</li>
-	
+		<li>
+			<%= link_to "Home", root_path %>				
+		</li>
+		<li>
+			<%= link_to "Logout", destroy_user_session_path, method: :delete %>				
+		</li>
+
 		<span class="welcome"><h4>Welcome <%= current_user.email %></h4></span>
-	
+	<% else %>
+		<li>
+			<%= link_to "Login", new_user_session_path %>				
+		</li>
+		<li>
+			<%= link_to "Sign up", new_user_registration_path %>				
+		</li>
 	<% end %>
-</ul>	
+</ul>

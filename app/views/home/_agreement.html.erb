@@ -1,7 +1,6 @@
 <div>
     <p>
-        <%= link_to "Accept Agreement", "/agreement", {class: "btn btn-primary agreement", id: "register_account", remote: true,
-                                                        data: {"loading-text" => "<i class='fa fa-refresh fa-spin'></i>" } } %>
+        <%= link_to "Accept Agreement", "/agreement", {class: "btn btn-primary", id: "register_account", remote: true} %>
 
         <%= image_tag "/assets/loader3.gif", id: "agree_loader", class: "loader", style: "display:none;" %>
     </p>
