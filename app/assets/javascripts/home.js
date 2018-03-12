@@ -62,21 +62,21 @@ $(document).ready(function(){
     //     });
     // }
 
-    const first_stage_parameters = () => {
-        return([ "user_first_name", "user_last_name", "user_dob_1i",
-        "user_dob_2i", "user_dob3i", "user_legal_entity_type"]);
-    }
+const first_stage_parameters = () => {
+    return([ "user_first_name", "user_last_name", "user_dob_1i",
+    "user_dob_2i", "user_dob3i", "user_legal_entity_type"]);
+}
 
-    var verify_params = (first_stage_parameters) => {
-        if( $(user_first_name).val().trim().length == 0 || $(user_last_name).val().trim().length == 0 ||
-         $(user_dob_1i).val().trim().length == 0 || $(user_dob_2i).val().trim().length == 0 || $(user_dob_3i).val().trim().length == 0 ||
-         $(user_legal_entity_type).val().trim().length == 0 ){
-             $("#reqd_fld_err").css("display", "block");
-         }else{
-             $("#reqd_fld_err").css("display", "none");
-             $("#additional_info_frm").submit();
-        }
-     }
+var verify_params = (first_stage_parameters) => {
+    if( $(user_first_name).val().trim().length == 0 || $(user_last_name).val().trim().length == 0 ||
+        $(user_dob_1i).val().trim().length == 0 || $(user_dob_2i).val().trim().length == 0 || $(user_dob_3i).val().trim().length == 0 ||
+        $(user_legal_entity_type).val().trim().length == 0 ){
+            $("#reqd_fld_err").css("display", "block");
+        }else{
+            $("#reqd_fld_err").css("display", "none");
+            $("#additional_info_frm").submit();
+    }
+}
     
    
 

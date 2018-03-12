@@ -10,5 +10,16 @@ Rails.application.routes.draw do
   get "/complete_verfification", to: "home#complete"
   post "/verify_bank_info", to: "home#bank_details_verification"
 
+  resources :payments do
+    collection do
+      get :list
+    end
+    member do
+      get :pay      
+    end
+  end
+
+  post "/charge", to: "payments#charge"
+
   root to: 'home#index'
 end

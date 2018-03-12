@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<% if current_action == "edit" %>%
+<% if current_action == "edit" %>
     <div class="form-group row">
          <div class="col-md-6">
             <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
@@ -51,8 +51,15 @@
 <% end %>
 
 <div class="form-group row">
-    <div class="col-md-6 custom_dropdown proof">
-        <%= f.label :country %><br />
-        <%= f.select :country, options_for_select([["USA", "US"]]) %>
+    <div class="col-md-6">
+        <label for="type">Country</label><br />
+        <%= f.select :country, options_for_select([["USA", "US"]]), {}, {class: "custom_dropdown country_select"} %>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-md-6">
+        <label for="type">Login As</label><br />
+        <%= f.select :type, options_for_select([["Doctor", "doctor"], ["Patient", "patient"]]), {}, {class: "custom_dropdown user_type"} %>
     </div>
 </div>

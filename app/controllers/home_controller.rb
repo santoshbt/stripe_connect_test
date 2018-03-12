@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
     before_action :authenticate_user!
+    after_action :update_account_status, except: ['index', 'complete']
 
     def index  
         @agreement_accepted = false
@@ -102,11 +103,20 @@ class HomeController < ApplicationController
         end  
     end
 
-    def complete        
+    def complete
+        account = Account.new(current_user.stripe_id)
+        verification_status = account.account_status.legal_entity.verification.status  
+        redirect_to root_path unless verification_status == "verified"
     end
 
     private
     def proof_params
         params.require(:proof).permit(:purpose, :file, :personal_id_number)
+    end
+
+    def update_account_status
+        account = Account.new(current_user.stripe_id)
+        verification_status = account.account_status.legal_entity.verification.status                
+        current_user.update_attributes({status: verification_status})         
     end
 end

@@ -1,0 +1,41 @@
+<div class="well details_panel">    
+
+    <div id="payment_err" class="alert alert-danger alert-dismissible" role="alert" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        Payment not successful, Please try again.
+    </div>
+
+    <%#= form_tag(charge_payment_path(id: @user.id), method: :post, :id => 'payment_frm', remote: true, :authenticity_token => true) do %>
+      
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="currency">Currency</label>
+                <span class="mand">*</span>
+                <input class="form-control" id="currency" name="payment[currency]" type="text" value= "USD" autocomplete="off" >
+            </div>
+        </div>  
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="number">Card Number</label>
+                <span class="mand">*</span>
+                <input class="form-control" id="number" name="payment[number]" type="text" autocomplete="off">
+            </div>
+        </div>  
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="country">Expiry Month</label>
+                <span class="mand">*</span>
+                <input class="form-control" id="month" name="bank_detail[exp_month]"  type="text" autocomplete="off">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for="country">Expiry Year</label>
+                <span class="mand">*</span>
+                <input class="form-control" id="year" name="bank_detail[exp_year]"  type="text" autocomplete="off">
+            </div>
+        </div>
+
+        <%= submit_tag "Pay", class: "btn btn-primary" ,data: { disable_with: "Please wait..." }, id: "create_charge" %>   
+    <%# end %>
+</div>

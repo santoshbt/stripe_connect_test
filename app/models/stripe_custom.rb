@@ -1,6 +1,9 @@
 class StripeCustom
     attr_reader :account_token, :first_name, :last_name, :day, :month, :year, :legal_entity_type
 
+    PENDING = "pending"
+    VERIFIED = "verified"
+
     def initialize(user)        
         @first_name = user['first_name']
         @last_name = user['last_name']

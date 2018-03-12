@@ -1,0 +1,45 @@
+<script src="https://js.stripe.com/v3/"></script>
+
+<form action="/charge" method="post" id="payment-form">
+  <div class="form-row">
+    <label for="card-element" style="margin-left: 16px;">
+      Credit or debit card
+    </label>
+    <div id="card-element">
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
+
+    <!-- Used to display form errors. -->
+    <div id="card-errors" role="alert"></div>
+  </div> <br />
+  
+  <div class=col-md-6>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="currency">Currency</label>
+            <span class="mand">*</span>
+            <input class="form-control" id="currency" name="payment[currency]" type="text" value= "USD" autocomplete="off" >
+        </div>
+    </div>  
+
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="country">Amount</label>
+            <span class="mand">*</span>
+            <input class="form-control" id="month" name="payment[amount]"  type="text" autocomplete="off">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="country">Description</label>
+            <input class="form-control" id="month" name="payment[amount]"  type="text" autocomplete="off">
+        </div>
+    </div>
+
+    <button class="submit">Submit Payment</button>
+</div>
+
+
+
+</form>
