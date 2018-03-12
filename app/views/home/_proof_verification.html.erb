@@ -1,5 +1,5 @@
 <div class="proof_result"></div>
-<div class = "well">
+<div class = "well details_panel">
     <h3> Upload Govt ID Proof</h3>
    <%= form_tag('/upload_id_proof', multipart: true) do %>
         <% if @proof.errors.any? %>
@@ -17,7 +17,7 @@
         <div class="form-group row">
             <div class="col-md-6">
                 <label for="purpose">Purpose</label>
-                <select id="purpose" name="proof[purpose]" style="width: 75%;">
+                <select id="purpose" name="proof[purpose]" class="custom_dropdown proof">
                     <option value="">Select</option>
                     <option value="business_logo">Business Logo</option>
                     <option value="customer_signature">Customer Signature</option>
@@ -31,9 +31,8 @@
 
         <div class="form-group row">
             <div class="col-md-6">
-                <label for="document">Document</label>
-                <%= file_field_tag 'proof[file]' %>
-            </div>
+                <%= file_field_tag 'proof[file]' %>            
+            </div>            
         </div>
 
         <div class="form-group row">
@@ -50,3 +49,8 @@
 </div>
 
 
+<script>
+    $(document).ready( function() {
+        $('input[type=file]').bootstrapFileInput();
+    });
+</script>

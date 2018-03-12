@@ -1,4 +1,4 @@
-<div class="well">
+<div class="well details_panel">
     <div id="reqd_fld_err" class="alert alert-danger alert-dismissible" role="alert" style="display:none;">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         Please provide all the bank details properly.
@@ -34,14 +34,12 @@
             </div>
         </div>
 
-        <div></div>
-
         <div class="form-group row">
             <div class="col-md-6">
                 <label for="acc_type">Legal Entity Type</label>
                 <span class="mand">*</span>
                 <div>
-                    <select id="user_legal_entity_type" name="user[legal_entity_type]" class="legal_entity_type">
+                    <select id="user_legal_entity_type" name="user[legal_entity_type]" class="custom_dropdown legal_entity_type">
                         <option value="company">Company</option>
                         <option value="individual">Individual</option>
                     </select>
