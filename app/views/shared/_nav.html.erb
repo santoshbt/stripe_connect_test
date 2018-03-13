@@ -9,22 +9,25 @@
 <ul class="nav nav-tabs">
 	<% if current_user %>
 		<li class=<%=active('home', 'index')%>>
-			<%= link_to "Home", root_path %>				
+			<%= link_to "Home", root_path, class: 'navHeads' %>				
+		</li>
+		<li class=<%=active('home', 'second_stage_info')%>>
+			<%= link_to "Location and ID Proof", second_stage_info_path, class: 'navHeads'  %>				
 		</li>
 		<li>
-			<%= link_to "Logout", destroy_user_session_path, method: :delete %>				
+			<%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navHeads'  %>				
 		</li>
 
 		<span class="welcome"><h4>Welcome <%= current_user.email %></h4></span>
 	<% else %>
 		<li class=<%=active("devise/sessions", "new")%>>
-			<%= link_to "Login", new_user_session_path %>				
+			<%= link_to "Login", new_user_session_path, class: 'navHeads'  %>				
 		</li>
 		<li class=<%=active("devise/registrations", "new")%>>
-			<%= link_to "Sign up", new_user_registration_path %>				
+			<%= link_to "Sign up", new_user_registration_path, class: 'navHeads'  %>				
 		</li>
 	<% end %>
 		<li class=<%=active("payments", "list")%>>
-			<%= link_to "Payments", list_payments_path %>				
+			<%= link_to "Payments", list_payments_path, class: 'navHeads'  %>				
 		</li>
 </ul>

@@ -35,12 +35,12 @@
 
 #agree_loader{   
     float: right;
-    margin-right: 82%;
+    margin-right: 83%;
 }
 
 #create_acc_loader{
     float: right;
-    margin-right: 78%;
+    margin-right: 79%;
 }
 
 h3,p {
@@ -223,4 +223,22 @@ height: 120%;
     width: 83px;
     height: 30px;
     padding-top: 3px;
+}
+
+.disclaim{
+    font-size: 13px !important;
+    color: slategray !important;
+}
+
+#register_account,#stripe_connect{
+    margin-left: -21px; 
+}
+
+.navHeads{
+    color: #c55e53;
+}
+
+._link{
+    color: #00000082;
+    text-decoration: underline;
 }
