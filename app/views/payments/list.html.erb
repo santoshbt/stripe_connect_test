@@ -13,7 +13,7 @@
             <th scope="row"><%= index + 1 %></th>
             <td><%= user.full_name %></td>
             <td><%= user.email %></td>
-            <td><%= link_to "Pay", pay_payment_path(id: user.id) , id: "pay_#{user.id}" %></td>
+            <td><%= link_to "Pay", pay_payment_path(id: user.id), class: "btn btn-primary", id: "pay_#{user.id}" %></td>
         </tr>
     <% end %>
   </tbody>

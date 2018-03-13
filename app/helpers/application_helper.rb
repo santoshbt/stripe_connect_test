@@ -1,6 +1,6 @@
 module ApplicationHelper
     def current_controller
-        params['action']
+        params['controller']
     end
 
     def current_action

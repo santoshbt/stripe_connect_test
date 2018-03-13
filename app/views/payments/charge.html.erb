@@ -1,0 +1,13 @@
+<% unless @credit.blank? %>
+    <div class="details">
+        <div class="jumbotron connect_to_stripe">
+            <h3> Congratulations, You have successfully made a payment of <%= number_to_currency @credit.amount / 100.0 %> </h3>
+        </div>    
+    </div>
+<% else %>
+    <div class="details">
+        <div class="jumbotron connect_to_stripe">
+            <h3> Sorry, your transaction has been failed. Please try again. </h3>
+        </div>    
+    </div>
+<% end %>

@@ -1,6 +1,5 @@
-<script src="https://js.stripe.com/v3/"></script>
 
-<form action="/charge" method="post" id="payment-form">
+<%= form_tag(charge_payment_path(id: @user.id), method: :post, :id => 'payment-form', :authenticity_token => true) do %>
   <div class="form-row">
     <label for="card-element" style="margin-left: 16px;">
       Credit or debit card
@@ -24,7 +23,7 @@
 
     <div class="form-group row">
         <div class="col-md-6">
-            <label for="country">Amount</label>
+            <label for="aount">Amount (in dollors) </label>
             <span class="mand">*</span>
             <input class="form-control" id="month" name="payment[amount]"  type="text" autocomplete="off">
         </div>
@@ -32,14 +31,64 @@
 
     <div class="form-group row">
         <div class="col-md-6">
-            <label for="country">Description</label>
-            <input class="form-control" id="month" name="payment[amount]"  type="text" autocomplete="off">
+            <label for="description">Description</label>
+            <input class="form-control" id="month" name="payment[description]"  type="text" autocomplete="off">
         </div>
     </div>
-
-    <button class="submit">Submit Payment</button>
+    
+    <%= submit_tag "Pay", class: "submit", id: "pay_card" %>  
 </div>
+<% end %>
 
+<script>
+    var stripe = Stripe('pk_test_hX4uRE9S0IrR043fAfqoWfSj');
+    var elements = stripe.elements();
 
+    var style = {
+        base: {
+          color: '#32325d',
+          lineHeight: '18px',
+          fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+          fontSmoothing: 'antialiased',
+          fontSize: '16px',
+          '::placeholder': {
+            color: '#aab7c4'
+          }
+        },
+        invalid: {
+          color: '#fa755a',
+          iconColor: '#fa755a'
+        }
+      };
+      
+      // Create an instance of the card Element.
+    var card = elements.create('card', {style: style});
+    
+    // Add an instance of the card Element into the `card-element` <div>.
+    card.mount('#card-element');
 
-</form>
+    card.addEventListener('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+        stripe.createToken(card).then(function(result) {
+            if (result.error) {
+            // Inform the customer that there was an error.
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+            } else {
+            // Send the token to your server.
+            stripeTokenHandler(result.token);
+            }
+        });
+    });
+</script>

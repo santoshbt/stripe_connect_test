@@ -8,7 +8,7 @@
 
 <ul class="nav nav-tabs">
 	<% if current_user %>
-		<li>
+		<li class=<%=active('home', 'index')%>>
 			<%= link_to "Home", root_path %>				
 		</li>
 		<li>
@@ -17,14 +17,14 @@
 
 		<span class="welcome"><h4>Welcome <%= current_user.email %></h4></span>
 	<% else %>
-		<li>
+		<li class=<%=active("devise/sessions", "new")%>>
 			<%= link_to "Login", new_user_session_path %>				
 		</li>
-		<li>
+		<li class=<%=active("devise/registrations", "new")%>>
 			<%= link_to "Sign up", new_user_registration_path %>				
 		</li>
 	<% end %>
-		<li>
+		<li class=<%=active("payments", "list")%>>
 			<%= link_to "Payments", list_payments_path %>				
 		</li>
 </ul>

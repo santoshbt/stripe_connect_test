@@ -9,15 +9,7 @@ class PaymentsController < ApplicationController
     end
 
     def charge
-        user = User.find params[:id]
-        puts user.inspect
-        
-        debit = Payment.new(user.stripe_id).pay(params[:payment])
-        # if account.upload_proof(@proof)            
-        #     redirect_to complete_verfification_path
-        # else
-        #     flash[:error] = "Please input the required information along with the valid ID Proof."
-        #     render 'second_stage_info'
-        # end
+        user = User.find params[:id]        
+        @credit = Payment.new(user.stripe_id).pay(params[:payment], params["stripeToken"])
     end
 end

@@ -7,20 +7,22 @@ class Payment
         Stripe.api_key = ENV['stripe_secret_key']        
     end
     
-    def pay(payment)
+    def pay(payment, token)
         account_status
-        Stripe::Charge.create(
-            :amount => payment['amount'],
-            :currency => payment['currency'],
-            :source => {
-                :object => "card",
-                :number => payment['number'],
-                :exp_month => payment['exp_month'],
-                :exp_year => payment['exp_year']
-            },
-            :destination => @stripe_id
-        )
-
-        puts Stripe::Account.retrieve(@stripe_id)
+        amount_in_dollors = payment['amount'].to_i * 100
+        begin
+            charge = Stripe::Charge.create(
+                :amount => amount_in_dollors,
+                :currency => payment['currency'].downcase,
+                :description => payment['description'],
+                :source => token,
+                :destination => @stripe_id 
+            )
+            puts charge.inspect
+            puts charge.status.inspect
+            return charge if charge.status == StripeCustom::SUCCESS
+        rescue => exception
+            return nil
+        end
     end
 end

@@ -3,6 +3,8 @@ class StripeCustom
 
     PENDING = "pending"
     VERIFIED = "verified"
+    NEWONE = "newone"
+    SUCCESS = "succeeded"
 
     def initialize(user)        
         @first_name = user['first_name']

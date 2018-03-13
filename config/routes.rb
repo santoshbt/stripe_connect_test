@@ -15,11 +15,10 @@ Rails.application.routes.draw do
       get :list
     end
     member do
-      get :pay      
+      get :pay 
+      post :charge     
     end
   end
-
-  post "/charge", to: "payments#charge"
 
   root to: 'home#index'
 end

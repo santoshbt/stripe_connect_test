@@ -26,4 +26,9 @@ module HomeHelper
     def account_buttons_display   
         (!stripe_account_created? || agreement_yet_to_be_accepted?) ? "display:block;" : "display:none;"
     end
+
+    def active(controller, action)
+        return "active" if current_controller == controller && current_action == action 
+        return nil
+    end
 end
