@@ -18,6 +18,6 @@ class User < ApplicationRecord
   end
 
   def self.verified
-    where(status: "verified")
+    where(status: "verified").order("updated_at DESC")
   end
 end
