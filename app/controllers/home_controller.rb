@@ -106,7 +106,7 @@ class HomeController < ApplicationController
     def complete
         account = Account.new(current_user.stripe_id)
         verification_status = account.account_status.legal_entity.verification.status  
-        redirect_to root_path unless verification_status == "verified"
+        redirect_to root_path unless verification_status == StripeCustom::VERIFIED
     end
 
     private
