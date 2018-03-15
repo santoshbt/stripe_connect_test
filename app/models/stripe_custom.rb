@@ -6,6 +6,9 @@ class StripeCustom
     NEWONE = "newone"
     SUCCESS = "succeeded"
 
+    ADDTIONAL_INFO = ["legal_entity.dob.day", "legal_entity.dob.month", "legal_entity.dob.year", 
+                        "legal_entity.first_name", "legal_entity.last_name", "legal_entity.type"]
+
     def initialize(user)        
         @first_name = user['first_name']
         @last_name = user['last_name']

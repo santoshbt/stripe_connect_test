@@ -1,4 +1,4 @@
-<div class="well details_panel">
+<div class="well details_panel" style="padding-top: 33px;height: 428px;">
     <div id="bank_fld_err" class="alert alert-danger alert-dismissible" role="alert" style="display:none;">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         Please provide all the bank details properly.
@@ -9,7 +9,9 @@
         Bank Details are verified successfully.
     </div>
 
-    <h3>Verify Bank details</h3>
+    <span class="bank_header">Verify Bank details</span>
+    <%= bank_detail_verified? ? "<span class='verified_lbl label label-success'>Verified</span>".html_safe : "" %>
+
     <%= form_tag('/verify_bank_info', method: :post, :id => 'bank_info_frm', remote: true, :authenticity_token => true) do %>
         <div class="form-group row">
             <div class="col-md-6">

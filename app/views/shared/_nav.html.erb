@@ -11,9 +11,14 @@
 		<li class=<%=active('home', 'index')%>>
 			<%= link_to "Home", root_path, class: 'navHeads' %>				
 		</li>
-		<li class=<%=active('home', 'second_stage_info')%>>
-			<%= link_to "Location and ID Proof", second_stage_info_path, class: 'navHeads'  %>				
-		</li>
+		<% unless current_user.stripe_id.blank? %>
+			<li class=<%=active('home', 'edit_additional_info')%>>
+				<%= link_to "Additional Details verification", edit_additional_info_path, class: 'navHeads'  %>				
+			</li>		
+			<li class=<%=active('home', 'second_stage_info')%>>
+				<%= link_to "Location and ID Proof", second_stage_info_path, class: 'navHeads'  %>				
+			</li>
+		<% end %>			
 		<li>
 			<%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navHeads'  %>				
 		</li>

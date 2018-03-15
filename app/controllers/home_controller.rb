@@ -5,17 +5,21 @@ class HomeController < ApplicationController
     def index  
         @agreement_accepted = false
         unless current_user.stripe_id.blank? 
+            @account_status = Account.new(current_user.stripe_id).account_status
             @agreement_accepted = Account.new(current_user.stripe_id).acceptance_status      
+            if current_user.status == StripeCustom::VERIFIED
+                redirect_to complete_verfification_path
+            end
         end  
     end
 
     #### Need to refactor ####
     def agreement
         begin
-            account_status = Account.new(current_user.stripe_id).account_status
-            account_status.tos_acceptance.date = Time.now.to_i
-            account_status.tos_acceptance.ip = request.remote_ip # Assumes you're not using a proxy
-            account_status.save 
+            @account_status = Account.new(current_user.stripe_id).account_status
+            @account_status.tos_acceptance.date = Time.now.to_i
+            @account_status.tos_acceptance.ip = request.remote_ip # Assumes you're not using a proxy
+            @account_status.save 
             @accept_flag = true
         rescue Exception => e
             @accept_flag = false
@@ -56,6 +60,10 @@ class HomeController < ApplicationController
         respond_to do |format|
             format.js 
         end
+    end
+
+    def edit_additional_info      
+        @account_status = Account.new(current_user.stripe_id).account_status  
     end
 
    ###############  Verify the additional required info ###################

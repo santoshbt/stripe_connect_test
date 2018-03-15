@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "/verify_location_info", to: "home#location_info"
   post "/upload_id_proof", to: "home#upload_id_proof"
   get "/complete_verfification", to: "home#complete"
+  get "/edit_additional_info", to: "home#edit_additional_info"
   post "/verify_bank_info", to: "home#bank_details_verification"
 
   resources :payments do

@@ -31,4 +31,19 @@ module HomeHelper
         return "active" if current_controller == controller && current_action == action 
         return nil
     end
+
+    def additional_details_verified?
+        return true if !current_user.stripe_id.blank? && @account_status.verification.fields_needed - StripeCustom::ADDTIONAL_INFO == []
+        return false
+    end
+
+    def bank_detail_verified?
+        return true if !current_user.stripe_id.blank? && (!@account_status.verification.fields_needed.include?("external_account"))
+        return false
+    end
+
+    def misc_details_verified?x
+        return true  if !current_user.stripe_id.blank? && (@account_status.verification.fields_needed - ["external_account"]).blank?
+        return false
+    end
 end
