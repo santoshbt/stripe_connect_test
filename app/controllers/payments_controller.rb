@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
     end
 
     def charge
-        user = User.find params[:id]        
-        @credit = Payment.new(user.stripe_id).pay(params[:payment], params["stripeToken"])
+        @user = User.find params[:id]        
+        @credit = Payment.new(@user.stripe_id).pay(params[:payment], params["stripeToken"])
     end
 end

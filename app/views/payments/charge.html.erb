@@ -1,7 +1,7 @@
 <% unless @credit.blank? %>
     <div class="details">
         <div class="jumbotron connect_to_stripe">
-            <h3> Congratulations, You have successfully made a payment of <%= number_to_currency @credit.amount / 100.0 %> </h3>
+            <h3> Congratulations, You have successfully made a payment of <%= number_to_currency @credit.amount / 100.0 %> to <%= @user.full_name %> </h3>
         </div>    
     </div>
 <% else %>
