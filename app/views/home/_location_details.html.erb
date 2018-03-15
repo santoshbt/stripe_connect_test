@@ -16,7 +16,7 @@
             <div class="col-md-6">
                 <label for="addr_line1">Address Line 1</label>
                 <span class="mand">*</span>
-                <%= text_field_tag 'location[addr_line1]', nil, class: "form-control" %>
+                <%= text_field_tag 'location[addr_line1]', nil, placeholder: '1234 Main Street', class: "form-control" %>
             </div>
         </div>
 
@@ -31,7 +31,7 @@
             <div class="col-md-6">
                 <label for="postal_code">Postal Code</label>
                 <span class="mand">*</span>
-                <%= text_field_tag 'location[postal_code]', nil, class: "form-control" %>
+                <%= text_field_tag 'location[postal_code]', nil, placeholder: '94111', class: "form-control" %>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
             <div class="col-md-6">
                 <label for="city">City</label>
                 <span class="mand">*</span>
-                <%= text_field_tag 'location[city]', nil, class: "form-control" %>
+                <%= text_field_tag 'location[city]', nil, placeholder: 'San Francisco', class: "form-control" %>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
             <div class="col-md-6">
                 <label for="state">State</label>
                 <span class="mand">*</span>
-                <%= text_field_tag 'location[state]', nil, class: "form-control" %>
+                <%= text_field_tag 'location[state]', nil, placeholder: 'CA', class: "form-control" %>
             </div>
         </div>
 
@@ -72,7 +72,7 @@
             <div class="col-md-6">
                 <label for="ssn">SSN (Last 4 digits)</label>
                 <span class="mand">*</span>
-                <%= text_field_tag 'location[ssn]', nil, class: "form-control" %>
+                <%= text_field_tag 'location[ssn]', nil, placeholder: '1234', class: "form-control" %>
             </div>
         </div>  
         <%= submit_tag "Submit", class: "btn btn-primary", data: { disable_with: "Please wait..." }, id: "add_location_details" %>   
