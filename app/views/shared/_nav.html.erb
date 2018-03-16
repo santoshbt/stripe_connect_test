@@ -11,7 +11,7 @@
 		<li class=<%=active('home', 'index')%>>
 			<%= link_to "Home", root_path, class: 'navHeads' %>				
 		</li>
-		<% unless current_user.stripe_id.blank? %>
+		<% if !current_user.stripe_id.blank? && @agreement_accepted %>
 			<li class=<%=active('home', 'edit_additional_info')%>>
 				<%= link_to "Additional Details verification", edit_additional_info_path, class: 'navHeads'  %>				
 			</li>		
