@@ -23,17 +23,22 @@ class Account
         account_status.save
     end
 
-    def update_first_stage_info(stripe_account)     
+    def update_first_stage_info(stripe_account, user)     
         account = account_status
-        account.tap { |acc|
-            acc.legal_entity.dob.day = stripe_account.day
-            acc.legal_entity.dob.month = stripe_account.month
-            acc.legal_entity.dob.year = stripe_account.year
-            acc.legal_entity.first_name = stripe_account.first_name
-            acc.legal_entity.last_name = stripe_account.last_name
-            acc.legal_entity.type = stripe_account.legal_entity_type
-            acc.save
-        }       
+        begin
+            account.tap { |acc|
+                acc.legal_entity.dob.day = stripe_account.day
+                acc.legal_entity.dob.month = stripe_account.month
+                acc.legal_entity.dob.year = stripe_account.year
+                acc.legal_entity.first_name = stripe_account.first_name
+                acc.legal_entity.last_name = stripe_account.last_name
+                acc.legal_entity.type = stripe_account.legal_entity_type
+                acc.save
+            }
+            user.update_attributes({ dob_verification: true})
+        rescue => exception
+            return false
+        end       
     end
 
     def bank_detail_verification(user, bank_details)

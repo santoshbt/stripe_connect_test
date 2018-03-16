@@ -23,16 +23,18 @@
             </div>
         </div>
 
-        <div class="form-group row">
-            <div class="col-md-6" style="width: 90%;">
-                <label for="exiternal_account">DOB</label>
-                <span class="mand">*</span>
-                <div class="dob_fld">
-                    <%= date_select("user", "dob",  start_year: 1900, 
-                                    prompt: { day: 'Select day', month: 'Select month', year: 'Select year' } ) %>
+        <% if !current_user.dob_verification %>
+            <div class="form-group row">
+                <div class="col-md-6" style="width: 90%;">
+                    <label for="exiternal_account">DOB (Can be updated only once)</label>
+                    <span class="mand">*</span>
+                    <div class="dob_fld">
+                        <%= date_select("user", "dob",  start_year: 1900, 
+                                        prompt: { day: 'Select day', month: 'Select month', year: 'Select year' } ) %>
+                    </div>
                 </div>
             </div>
-        </div>
+        <% end %>
 
         <div class="form-group row">
             <div class="col-md-6">

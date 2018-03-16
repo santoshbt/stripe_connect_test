@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
     before_action :authenticate_user!
-    before_action :agreement_accepted, except: ['index']
+    before_action :agreement_accepted, except: ['index', 'info', 'agreement']
     after_action :update_account_status, except: ['index', 'complete']
-
+   
     def index  
         @agreement_accepted = false
         unless current_user.stripe_id.blank? 
@@ -73,7 +73,7 @@ class HomeController < ApplicationController
 
         if stripe.met_verification
             account = Account.new(current_user.stripe_id)
-            first_stage = account.update_first_stage_info( stripe ) 
+            first_stage = account.update_first_stage_info( stripe, current_user ) 
             redirect_to second_stage_info_path
         else 
             @agreement_accepted = true
@@ -130,6 +130,6 @@ class HomeController < ApplicationController
     end
 
     def agreement_accepted
-        @agreement_accepted = Account.new(current_user.stripe_id).acceptance_status
+        @agreement_accepted = Account.new(current_user.stripe_id).acceptance_status unless current_user.stripe_id.blank?
     end
 end
