@@ -35,7 +35,7 @@ $(document).ready(function(){
 });
 
     // let verify_details = (account_details) => {
-    //     const stripe = Stripe('pk_test_hX4uRE9S0IrR043fAfqoWfSj');
+    //     let stripe = Stripe('pk_test_hX4uRE9S0IrR043fAfqoWfSj');
 
     //     stripe.createToken('bank_account', {
     //         country: $(country).val(),
@@ -62,7 +62,7 @@ $(document).ready(function(){
     //     });
     // }
 
-const first_stage_parameters = () => {
+let first_stage_parameters = () => {
     return([ "user_first_name", "user_last_name", "user_dob_1i",
     "user_dob_2i", "user_dob3i", "user_legal_entity_type"]);
 }

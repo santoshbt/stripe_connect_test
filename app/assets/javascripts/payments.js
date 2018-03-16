@@ -17,7 +17,7 @@ function stripeTokenHandler(token) {
 
 
 // let verify_details = (account_details) => {
-//     const stripe = Stripe('pk_test_hX4uRE9S0IrR043fAfqoWfSj');
+//     let stripe = Stripe('pk_test_hX4uRE9S0IrR043fAfqoWfSj');
 
 //     stripe.createToken('bank_account', {
 //         country: $(country).val(),
