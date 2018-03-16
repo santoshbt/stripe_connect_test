@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
     before_action :authenticate_user!
+    before_action :agreement_accepted, except: ['index']
     after_action :update_account_status, except: ['index', 'complete']
 
     def index  
@@ -126,5 +127,9 @@ class HomeController < ApplicationController
         account = Account.new(current_user.stripe_id)
         verification_status = account.account_status.legal_entity.verification.status                
         current_user.update_attributes({status: verification_status})         
+    end
+
+    def agreement_accepted
+        @agreement_accepted = Account.new(current_user.stripe_id).acceptance_status
     end
 end
