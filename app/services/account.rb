@@ -8,24 +8,24 @@ class Account
         Stripe::Account.retrieve(@stripe_id)
     end
 
-    def fields_required 
+    def fields_required
         account_status.verification.fields_needed
     end
 
     def acceptance_status
         !account_status.tos_acceptance.date.blank? && !account_status.tos_acceptance.ip.blank?
-    end    
+    end
 
     ######## This method is not used as it is not working for unknown reason #######
-    def accept(request)        
+    def accept(request)
         account_status.tos_acceptance.date = Time.now.to_i
         account_status.tos_acceptance.ip = request.remote_ip # Assumes you're not using a proxy
         account_status.save
     end
 
-    def update_first_stage_info(stripe_account, user)     
+    def update_first_stage_info(stripe_account, user)
         account = account_status
-        begin
+        # begin
             account.tap { |acc|
                 acc.legal_entity.dob.day = stripe_account.day
                 acc.legal_entity.dob.month = stripe_account.month
@@ -36,14 +36,14 @@ class Account
                 acc.save
             }
             user.update_attributes({ dob_verification: true})
-        rescue => exception
-            return false
-        end       
+        # rescue => exception
+        #     return false
+        # end
     end
 
     def bank_detail_verification(user, bank_details)
         account = account_status
-        begin
+        # begin
             account.tap{ |acc|
                 acc.external_account = {
                     object: 'bank_account',
@@ -54,15 +54,15 @@ class Account
                 }
                 return true if acc.save
             }
-        rescue => exception
-            return false
-        end
-      
+        # rescue => exception
+        #     return false
+        # end
+
     end
 
     def update_location_info(location)
         account = account_status
-        begin
+        # begin
             account.tap { |acc|
                 acc.legal_entity.address.line1 = location[:addr_line1]
                 acc.legal_entity.address.postal_code = location[:postal_code]
@@ -70,16 +70,16 @@ class Account
                 acc.legal_entity.address.state = location[:state]
                 acc.legal_entity.ssn_last_4 = location[:ssn]
                 acc.legal_entity.business_name = location[:business_name] unless location[:business_name].blank?
-                acc.legal_entity.business_tax_id = location[:business_tax_id] unless location[:business_tax_id].blank?            
-                return true if acc.save            
+                acc.legal_entity.business_tax_id = location[:business_tax_id] unless location[:business_tax_id].blank?
+                return true if acc.save
             }
-        rescue => exception
-            return false
-        end
+        # rescue => exception
+        #     return false
+        # end
     end
 
     def upload_proof(proof)
-        begin
+        # begin
             fpath = File.join Rails.root, 'public'
             file_obj = Stripe::FileUpload.create(
             {
@@ -92,15 +92,15 @@ class Account
             )
             file = file_obj.id
 
-            account = account_status        
+            account = account_status
             account.tap { |acc|
                 acc.legal_entity.personal_id_number = proof.personal_id_number
                 acc.legal_entity.verification.document = file
                 return true if acc.save
             }
-        rescue => exception
-            return false
-        end
+        # rescue => exception
+        #     return false
+        # end
     end
-        
+
 end

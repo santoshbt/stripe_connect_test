@@ -1,17 +1,17 @@
 class HomeController < ApplicationController
     before_action :authenticate_user!
     before_action :agreement_accepted, except: ['index', 'info', 'agreement']
-    after_action :update_account_status, except: ['index', 'complete']
-   
-    def index  
+    after_action :update_account_status, except: ['index']
+
+    def index
         @agreement_accepted = false
-        unless current_user.stripe_id.blank? 
+        unless current_user.stripe_id.blank?
             @account_status = Account.new(current_user.stripe_id).account_status
-            @agreement_accepted = Account.new(current_user.stripe_id).acceptance_status      
+            @agreement_accepted = Account.new(current_user.stripe_id).acceptance_status
             if current_user.status == StripeCustom::VERIFIED
                 redirect_to complete_verfification_path
             end
-        end  
+        end
     end
 
     #### Need to refactor ####
@@ -20,13 +20,13 @@ class HomeController < ApplicationController
             @account_status = Account.new(current_user.stripe_id).account_status
             @account_status.tos_acceptance.date = Time.now.to_i
             @account_status.tos_acceptance.ip = request.remote_ip # Assumes you're not using a proxy
-            @account_status.save 
+            @account_status.save
             @accept_flag = true
         rescue Exception => e
             @accept_flag = false
         end
         respond_to do |format|
-            format.js 
+            format.js
         end
     end
 
@@ -40,13 +40,13 @@ class HomeController < ApplicationController
                 current_user.update_attributes(stripe_id: stripe_account.id)
                 @success_flag = true
 
-                @agreement_accepted = Account.new(current_user.stripe_id).acceptance_status               
+                @agreement_accepted = Account.new(current_user.stripe_id).acceptance_status
             rescue Exception => e
                 @success_flag = false
-            end               
+            end
         end
         respond_to do |format|
-            format.js 
+            format.js
         end
     end
 
@@ -59,62 +59,62 @@ class HomeController < ApplicationController
             @success_flag = false
         end
         respond_to do |format|
-            format.js 
+            format.js
         end
     end
 
-    def edit_additional_info      
-        @account_status = Account.new(current_user.stripe_id).account_status  
+    def edit_additional_info
+        @account_status = Account.new(current_user.stripe_id).account_status
     end
 
    ###############  Verify the additional required info ###################
     def first_stage_info
-        stripe = StripeCustom.new(params[:user])        
+        stripe = StripeCustom.new(params[:user])
 
         if stripe.met_verification
             account = Account.new(current_user.stripe_id)
-            first_stage = account.update_first_stage_info( stripe, current_user ) 
+            first_stage = account.update_first_stage_info( stripe, current_user )
             redirect_to second_stage_info_path
-        else 
+        else
             @agreement_accepted = true
-            flash[:error] = "Please provide all the details"   
+            flash[:error] = "Please provide all the details"
             render :index
-        end    
+        end
     end
 
     def second_stage_info
         account = Account.new(current_user.stripe_id).account_status
-        @type = 'company' if account.legal_entity.type  == 'company'        
+        @type = 'company' if account.legal_entity.type  == 'company'
         @proof = Proof.new
     end
 
     def location_info
-        account = Account.new(current_user.stripe_id)        
+        account = Account.new(current_user.stripe_id)
         if account.update_location_info(params[:location])
             @success_flag = true
         else
             @success_flag = false
         end
         respond_to do |format|
-            format.js 
+            format.js
         end
     end
 
     def upload_id_proof
         @proof = Proof.new proof_params
-        @proof.save    
-        account = Account.new(current_user.stripe_id)        
-        if account.upload_proof(@proof)            
+        @proof.save
+        account = Account.new(current_user.stripe_id)
+        if account.upload_proof(@proof)
             redirect_to complete_verfification_path
         else
             flash[:error] = "Please input the required information along with the valid ID Proof."
             render 'second_stage_info'
-        end  
+        end
     end
 
     def complete
         account = Account.new(current_user.stripe_id)
-        verification_status = account.account_status.legal_entity.verification.status  
+        verification_status = account.account_status.legal_entity.verification.status
         redirect_to root_path unless verification_status == StripeCustom::VERIFIED
     end
 
@@ -125,8 +125,8 @@ class HomeController < ApplicationController
 
     def update_account_status
         account = Account.new(current_user.stripe_id)
-        verification_status = account.account_status.legal_entity.verification.status                
-        current_user.update_attributes({status: verification_status})         
+        verification_status = account.account_status.legal_entity.verification.status
+        current_user.update_attributes({status: verification_status})
     end
 
     def agreement_accepted
